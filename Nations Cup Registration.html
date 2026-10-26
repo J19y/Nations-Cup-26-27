@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Nations Cup Registration</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Saira+Condensed:wght@600;700;800&display=swap">
+<style>
+  /* Layout: burgundy masthead band over an ivory field, a filter bar, then a responsive grid of nation cards */
+  :root {
+    --bg: #F4EFE4;
+    --surface: #FFFFFF;
+    --fg: #15202E;
+    --muted: #5F6977;
+    --burgundy: #7A1F35;
+    --burgundy-ink: #FBF4E8;
+    --gold: #A8751F;
+    --line: #DFD6C5;
+    --card-shadow: 0 1px 2px rgba(21, 32, 46, .07), 0 6px 18px rgba(21, 32, 46, .05);
+    --display: "Saira Condensed", "Arial Narrow", Helvetica, sans-serif;
+    --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E141C;
+      --surface: #17212D;
+      --fg: #ECE6D9;
+      --muted: #97A3B2;
+      --burgundy: #8C2740;
+      --burgundy-ink: #FCF5E9;
+      --gold: #DBA94C;
+      --line: #2B3745;
+      --card-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E141C;
+    --surface: #17212D;
+    --fg: #ECE6D9;
+    --muted: #97A3B2;
+    --burgundy: #8C2740;
+    --burgundy-ink: #FCF5E9;
+    --gold: #DBA94C;
+    --line: #2B3745;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .gutter {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  /* Masthead */
+  .masthead { background: var(--burgundy); color: var(--burgundy-ink); }
+  .masthead .gutter { padding-block: 34px 30px; }
+  .eyebrow {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .82;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 9vw, 3.9rem);
+    line-height: .96;
+    letter-spacing: -.005em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .rule {
+    height: 3px;
+    width: 76px;
+    background: var(--gold);
+    margin: 18px 0 16px;
+  }
+  .lede {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 1.02rem;
+    opacity: .94;
+  }
+
+  /* Filter bar */
+  .toolbar .gutter {
+    padding-block: 20px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 16px;
+  }
+  .field { flex: 1 1 240px; min-width: 0; position: relative; }
+  input[type="search"] {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--fg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 11px 14px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input[type="search"]::placeholder { color: var(--muted); }
+  input[type="search"]:focus-visible {
+    outline: 2px solid var(--burgundy);
+    outline-offset: 2px;
+    border-color: transparent;
+  }
+  .count {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Grid */
+  main .gutter { padding-block: 14px 8px; }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 184px), 1fr));
+    gap: 12px;
+  }
+  .nation {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    height: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    box-shadow: var(--card-shadow);
+    padding: 14px 15px 13px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .14s ease, border-color .14s ease;
+  }
+  .nation:hover { border-color: var(--burgundy); transform: translateY(-2px); }
+  .nation:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; }
+  .code {
+    font-family: var(--display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--burgundy);
+  }
+  .name {
+    font-family: var(--display);
+    font-size: 1.42rem;
+    font-weight: 700;
+    line-height: 1.08;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+  }
+  .go {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--gold);
+  }
+  .nation:hover .go { color: var(--burgundy); }
+  .empty {
+    display: none;
+    padding: 26px 2px;
+    color: var(--muted);
+  }
+  .empty.show { display: block; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); margin-top: 26px; }
+  footer .gutter { padding-block: 22px 30px; }
+  .notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+    font-size: .92rem;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+  .notes strong { color: var(--fg); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nation { transition: none; }
+    .nation:hover { transform: none; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="gutter">
+    <p class="eyebrow">18 Nov &ndash; 2 Dec 2026 &middot; UNM Sports Network</p>
+    <h1>Nations Cup 26/27 Registration</h1>
+    <div class="rule"></div>
+    <p class="lede">Find your nation below and open its registration form. One form per nation &mdash; register through the nation you are representing.</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="gutter">
+    <div class="field">
+      <label class="sr-only" for="filter" hidden>Search nations</label>
+      <input id="filter" type="search" placeholder="Search for your nation&hellip;" autocomplete="off" spellcheck="false">
+    </div>
+    <span class="count" id="count">18 nations</span>
+  </div>
+</div>
+
+<main>
+  <div class="gutter">
+    <ul class="grid" id="grid">
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/vmrFqs7WTf" target="_blank" rel="noopener" data-name="africa"><span class="code">AF</span><span class="name">Africa</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/9qS8UsVX26" target="_blank" rel="noopener" data-name="americas"><span class="code">AM</span><span class="name">Americas</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/LRJfc1Tw85" target="_blank" rel="noopener" data-name="bangladesh"><span class="code">BD</span><span class="name">Bangladesh</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/yt4XRWmcsw" target="_blank" rel="noopener" data-name="brunei"><span class="code">BN</span><span class="name">Brunei</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/JZELKTk6DC" target="_blank" rel="noopener" data-name="china"><span class="code">CN</span><span class="name">China</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/77A5bUatMb" target="_blank" rel="noopener" data-name="egypt"><span class="code">EG</span><span class="name">Egypt</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/rgGSWkHKjc" target="_blank" rel="noopener" data-name="europe uk britain england"><span class="code">EU</span><span class="name">Europe &amp; UK</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/fKWFgpWbkv" target="_blank" rel="noopener" data-name="india"><span class="code">IN</span><span class="name">India</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/RfPebWG2Y9" target="_blank" rel="noopener" data-name="indonesia"><span class="code">ID</span><span class="name">Indonesia</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/Thq06HMTNJ" target="_blank" rel="noopener" data-name="japan"><span class="code">JP</span><span class="name">Japan</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/eF7FL04PJW" target="_blank" rel="noopener" data-name="malaysia"><span class="code">MY</span><span class="name">Malaysia</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/JJZSESi0GU" target="_blank" rel="noopener" data-name="maldives"><span class="code">MV</span><span class="name">Maldives</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/vvqVTiGGcP" target="_blank" rel="noopener" data-name="mena middle east north africa"><span class="code">ME</span><span class="name">MENA</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/eNvq2CDmvh" target="_blank" rel="noopener" data-name="myanmar burma"><span class="code">MM</span><span class="name">Myanmar</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/jHMrKNb9Wc" target="_blank" rel="noopener" data-name="pakistan"><span class="code">PK</span><span class="name">Pakistan</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/4URnWTJayD" target="_blank" rel="noopener" data-name="rest of asia other"><span class="code">AS</span><span class="name">Rest of Asia</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/zB8Y88tu5L" target="_blank" rel="noopener" data-name="sri lanka ceylon"><span class="code">LK</span><span class="name">Sri Lanka</span><span class="go">Open form &rarr;</span></a></li>
+      <li><a class="nation" href="https://forms.cloud.microsoft/r/updi1vDB5d" target="_blank" rel="noopener" data-name="sudan"><span class="code">SD</span><span class="name">Sudan</span><span class="go">Open form &rarr;</span></a></li>
+    </ul>
+    <p class="empty" id="empty">No nation matches that search. Clear the box to see all 18, or pick <strong>Rest of Asia</strong> if yours is not listed separately.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="gutter">
+    <ul class="notes">
+      <li>Follow <strong>@unmsportsnetwork</strong> for fixtures, results and announcements.</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var input = document.getElementById('filter');
+    var items = Array.prototype.slice.call(document.querySelectorAll('#grid > li'));
+    var count = document.getElementById('count');
+    var empty = document.getElementById('empty');
+
+    function label(n) { return n + (n === 1 ? ' nation' : ' nations'); }
+
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      items.forEach(function (li) {
+        var hay = li.querySelector('.nation').getAttribute('data-name');
+        var match = q === '' || hay.indexOf(q) !== -1;
+        li.hidden = !match;
+        if (match) shown++;
+      });
+      count.textContent = label(shown);
+      empty.classList.toggle('show', shown === 0);
+    });
+  })();
+</script>
+
+</body></html>
